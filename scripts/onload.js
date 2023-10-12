@@ -20,9 +20,10 @@ map.on('load', function () {
 		url:'mapbox://core-gis.5p42eakz'
 		});
 		//Add a map layer for all the tracts
-
+/*
+	//Add a layer symbolized on energy burden
 	map.addLayer({
-		"id":"tracts",
+		"id":"tracts-ebf",
 		"type":"fill",
 		"source":"justice40",
 		"source-layer":"justice40_CA_only-9e4kye",
@@ -45,6 +46,33 @@ map.on('load', function () {
 			'road-simple' // existing layer to position the new one behind
 	);
 });
+*/
+	//Add a layer symbolized on energy burden
+	map.addLayer({
+		"id":"tracts-lmi",
+		"type":"fill",
+		"source":"justice40",
+		"source-layer":"justice40_CA_only-9e4kye",
+		"layout":{		},
+		"paint":{
+				'fill-color':  {
+					property: 'LMI_PFS',
+					stops: [
+						[0,'#ffffff'],
+						[0.12,'#f7e6f9'],
+						[0.34,'#d4b9da'],
+						[0.56,'#df65b0'],
+						[0.77,'#ce1256'],
+						[0.99,'#67001f']
+						]
+				},
+				'fill-opacity': .75,
+				}
+			},
+			'road-simple' // existing layer to position the new one behind
+	);
+});
+
 
 /*
 // When a click event occurs on a feature in the states layer, open a popup at the
