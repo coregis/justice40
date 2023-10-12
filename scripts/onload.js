@@ -2,52 +2,51 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY29yZS1naXMiLCJhIjoiaUxqQS1zQSJ9.mDT5nb8l_dWI
 
 //set bounds to San Juan County
 var bounds = [
-		[-123.516541,48.328865], // southwest coords
-		[-122.252426,48.772935] // northeast coords
+		[-140.339355,27.819645], // southwest coords
+		[-99.887695,44.871443] // northeast coords
 	];
 
 const map = new mapboxgl.Map({
 	container: 'map',
-	style: 'mapbox://styles/core-gis/cl1l6639a004t14o9z7cr5ejd',
-	center: [-122.920189,48.573200],
-	zoom: 10
+	style: 'mapbox://styles/core-gis/ckxw53hlynv1e15mpdxxhw8lf',
+	center: [-120.825478,37.805959],
+	zoom: 6,
 });
 
 map.on('load', function () {
 
-	map.addSource('parcels',{
+	map.addSource('justice40',{
 		type:'vector',
-		url:'mapbox://core-gis.axlnkyxp'
+		url:'mapbox://core-gis.5p42eakz'
 		});
-		//Add a map layer for all the parcels
+		//Add a map layer for all the tracts
 
 	map.addLayer({
-		"id":"parcel_lines_outline",
-		"type":"line",
-		"source":"parcels",
-		"source-layer":"san_juan_county_parcels-dyole2",
-		"layout":{		},
-		"paint":{
-			'line-color': "#909291",
-            'line-width': 1
-	},
-});
-
-	map.addLayer({
-		"id":"parcel_lines",
+		"id":"tracts",
 		"type":"fill",
-		"source":"parcels",
-		"source-layer":"san_juan_county_parcels-dyole2",
+		"source":"justice40",
+		"source-layer":"justice40_CA_only-9e4kye",
 		"layout":{		},
 		"paint":{
-			'fill-color': 'rgba(200, 100, 240, 0)',
-            'fill-outline-color': 'rgba(200, 100, 240, 0)'
-			}	
-	},
+				'fill-color':  {
+					property: 'EBF_PFS',
+					stops: [
+						[0,'#ffffff'],
+						[0.15,'#ffffb2'],
+						[0.35,'#fecc5c'],
+						[0.59,'#fd8d3c'],
+						[0.8,'#f03b20'],
+						[0.99,'#bd0026']
+						]
+				},
+				'fill-opacity': .5,
+				}
+			},
 			'road-simple' // existing layer to position the new one behind
 	);
 });
 
+/*
 // When a click event occurs on a feature in the states layer, open a popup at the
     // location of the click, with description HTML from its properties.
     map.on('click', 'parcel_lines', function (e) {
@@ -85,3 +84,4 @@ map.on('load', function () {
 		//this will return the string to the calling function
 		
 	}
+*/
